@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King of Diamonds Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Front Page -->
+<div id="frontPage" class="container">
+  <h1>King of Diamonds Game</h1>
+  <div class="card-container">
+    <div class="card" id="kingCard">
+      <div class="card-front">
+        <img src="King.jpeg" alt="King of Diamonds">
+        <button id="playBtn" class="hoverBtn">Play Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Setup Page -->
+<div id="setup" class="container hidden">
+  <h2>Game Setup</h2>
+  <p>Select difficulty:</p>
+  <select id="difficulty">
+    <option value="easy">Easy (1–20)</option>
+    <option value="intermediate">Intermediate (1–50)</option>
+    <option value="hard">Hard (1–100)</option>
+  </select>
+
+  <p>Number of players (1–6):</p>
+  <input type="number" id="numPlayers" min="1" max="6">
+  <div id="playerInputs"></div>
+  <button id="startBtn">Start Game</button>
+
+  <div id="description">
+    <p><strong>Game Description:</strong> Each player selects a number. The target number is 2/3 × the average of all players’ numbers. Closest number wins the round. First to 5 points wins the game.</p>
+    <p><strong>Rules:</strong></p>
+    <ul>
+      <li>Each player chooses only one number per round.</li>
+      <li>Turns are sequential.</li>
+      <li>Target = 2/3 × Average.</li>
+      <li>Closest number wins the round.</li>
+      <li>First player to 5 points wins the game.</li>
+      <li>If only 1 player, you will face an AI.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Game Page -->
+<div id="game" class="container hidden">
+  <div class="game-header">
+    <p id="currentPlayer">Current Player: </p>
+    <p id="timerDisplay">Time left: <span id="timer">0</span>s</p>
+    <button id="exitBtn">Exit Game</button>
+  </div>
+  
+  <div id="buttonsContainer"></div>
+  <p id="chosenStatus"></p>
+  <button id="nextBtn" class="hidden">Next Player</button>
+
+  <div id="scores">
+    <h3>Scores</h3>
+    <ul id="scoreList"></ul>
+  </div>
+
+  <div id="results" class="hidden">
+    <p id="average"></p>
+    <p id="target"></p>
+    <p id="roundWinner"></p>
+    <p id="gameWinner" class="hidden"></p>
+    <button id="nextRoundBtn" class="hidden">Next Round</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

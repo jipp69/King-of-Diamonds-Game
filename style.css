@@ -1,0 +1,220 @@
+:root {
+  --primary-red: #ff0000;
+  --dark-bg: #111;
+  --dark-gradient: radial-gradient(circle at top, #1e1e1e, #2b0000);
+  --card-width: 40vw;
+  --card-max-width: 250px;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: var(--dark-gradient);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.container {
+  background-color: var(--dark-bg);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  width: 95%;
+  max-width: 900px;
+  box-shadow: 0 0 25px var(--primary-red);
+  position: relative;
+  z-index: 1;
+}
+
+.hidden { display: none; }
+
+input, select, button {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button {
+  background-color: var(--primary-red);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #cc0000;
+}
+
+/* Front Page Card */
+.card-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: var(--card-width);
+  max-width: var(--card-max-width);
+  height: calc(var(--card-width) * 1.4);
+  max-height: 350px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.card-front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.card-front:hover img,
+.card-front:active img {
+  filter: blur(4px);
+  transform: scale(1.05);
+}
+
+/* Play button on front page */
+.hoverBtn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: rgba(17,17,17,0.8);
+  color: var(--primary-red);
+  display: none;
+  z-index: 10;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-front:hover .hoverBtn,
+.card-front:active .hoverBtn {
+  display: block;
+  transform: translateX(-50%) scale(1.1);
+  opacity: 1;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1.15); }
+}
+
+/* Game number buttons - flip card */
+#buttonsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 5px;
+  justify-items: center;
+  margin: 15px 0;
+}
+
+#buttonsContainer button {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border: 2px solid var(--primary-red);
+  border-radius: 8px;
+  background: none;
+  perspective: 1000px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+
+#buttonsContainer button.flipped {
+  z-index: 10;
+}
+
+#buttonsContainer button .front,
+#buttonsContainer button .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  transition: transform 0.6s;
+}
+
+#buttonsContainer button .front { background-color: var(--dark-bg); color: #fff; }
+#buttonsContainer button .back { background-color: #fff; color: #000; transform: rotateY(180deg); }
+#buttonsContainer button.flipped .front { transform: rotateY(180deg); }
+#buttonsContainer button.flipped .back { transform: rotateY(0deg); }
+
+/* Timer bar */
+#timerDisplay {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+#timerBar {
+  width: 100%;
+  height: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#timerFill {
+  height: 100%;
+  background-color: var(--primary-red);
+  width: 100%;
+  transition: width 1s linear, background-color 0.5s;
+}
+
+/* Scores */
+#scores ul { list-style: none; padding: 0; text-align: left; }
+#scores li { margin: 3px 0; }
+
+/* Results */
+#results p { margin: 5px 0; }
+
+/* Diamond animation */
+.diamond {
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-red);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+  animation: floatDiamond 3s linear infinite;
+}
+
+@keyframes floatDiamond {
+  0% { top: 100%; opacity: 0; left: calc(10% + 0%); }
+  50% { opacity: 1; }
+  100% { top: -20px; opacity: 0; left: calc(90% + 0%); }
+}
